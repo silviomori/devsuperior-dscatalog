@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.technomori.dscatalog.dto.CategoryDTO;
+import com.technomori.dscatalog.entities.Category;
+import com.technomori.dscatalog.exceptions.EntityNotFoundException;
 import com.technomori.dscatalog.repositories.CategoryRepository;
 
 @Service
@@ -16,13 +18,22 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<CategoryDTO> findAll() {
 		return categoryRepository
-				.findAll()
-				.stream()
-				.map(item -> new CategoryDTO(item))
-				.collect(Collectors.toList());
+					.findAll()
+					.stream()
+					.map(item -> new CategoryDTO(item))
+					.collect(Collectors.toList());
+	}
+
+	@Transactional(readOnly = true)
+	public CategoryDTO findById(Long id) {
+		Category category = categoryRepository
+				.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException(
+						String.format("Category ID %d not found", id)));
+		return new CategoryDTO(category);
 	}
 
 }
