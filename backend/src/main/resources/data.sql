@@ -1,4 +1,34 @@
-
+INSERT INTO tb_category(name, created_at) VALUES('Amazon Device Accessories', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Amazon Kindle', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Automotive & Powersports', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Baby Products (excluding apparel)', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Beauty', NOW());
 INSERT INTO tb_category(name, created_at) VALUES('Books', NOW());
-INSERT INTO tb_category(name, created_at) VALUES('Computers', NOW());
-INSERT INTO tb_category(name, created_at) VALUES('Electronics', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Camera & Photo', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Cell Phones & Accessories', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Collectible Coins', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Consumer Electronics', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Entertainment Collectibles', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Fine Art', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Grocery & Gourmet Food', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Health & Personal Care', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Home & Garden', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Independent Design', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Industrial & Scientific', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Kindle Accessories and Amazon Fire TV Accessories', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Major Appliances', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Music', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Musical Instruments', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Office Products', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Outdoors', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Personal Computers', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Pet Supplies', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Software', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Sports', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Sports Collectibles', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Tools & Home Improvement', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Toys & Games', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Video, DVD & Blu-ray', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Video Games', NOW());
+INSERT INTO tb_category(name, created_at) VALUES('Watches', NOW());
+
