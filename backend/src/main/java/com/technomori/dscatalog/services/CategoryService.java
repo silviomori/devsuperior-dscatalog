@@ -1,7 +1,5 @@
 package com.technomori.dscatalog.services;
 
-import java.util.stream.Collectors;
-
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
