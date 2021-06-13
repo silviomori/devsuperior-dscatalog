@@ -1,5 +1,8 @@
 package com.technomori.dscatalog.dto;
 
+import com.technomori.dscatalog.services.validation.UserInsertValidator;
+
+@UserInsertValidator
 public class UserInsertDTO extends UserDTO {
 	private static final long serialVersionUID = 1L;
 
