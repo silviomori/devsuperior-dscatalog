@@ -5,6 +5,11 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
 import com.technomori.dscatalog.entities.Category;
 import com.technomori.dscatalog.entities.Product;
 
@@ -12,10 +17,14 @@ public class ProductDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	@NotBlank(message = "Required field")
+	@Size(min = 5, max = 60, message = "Name must be between 5 and 60 characters")
 	private String name;
 	private String description;
+	@Positive(message = "Price must be a positive value")
 	private Double price;
 	private String imgUrl;
+	@PastOrPresent(message = "Date cannot be in the future")
 	private Instant date;
 
 	private Set<CategoryDTO> categories = new HashSet<>();
