@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.technomori.dscatalog.dto.UserDTO;
 import com.technomori.dscatalog.dto.UserInsertDTO;
+import com.technomori.dscatalog.dto.UserUpdateDTO;
 import com.technomori.dscatalog.entities.User;
 import com.technomori.dscatalog.exceptions.DatabaseException;
 import com.technomori.dscatalog.exceptions.ResourceNotFoundException;
@@ -56,10 +57,10 @@ public class UserService {
 	}
 
 	@Transactional
-	public UserDTO update(Long id, UserDTO userDTO) {
+	public UserDTO update(Long id, UserUpdateDTO userUpdateDTO) {
 		try {
 			User userEntity = userRepository.getOne(id);
-			copyDataFromDtoToEntity(userDTO, userEntity);
+			copyDataFromDtoToEntity(userUpdateDTO, userEntity);
 			userEntity = userRepository.save(userEntity);
 			return new UserDTO(userEntity);
 		} catch (EntityNotFoundException e) {
