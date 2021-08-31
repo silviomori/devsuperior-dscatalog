@@ -59,10 +59,6 @@
     margin-bottom: 20px;
   }
 
-  .home-content-container button {
-    width: 506px;
-  }
-
   .home-image-container svg {
     width: 506px;
   }
@@ -130,10 +126,6 @@
     width: 500px;
     font-size: 0.5em;
     padding-bottom: 50px;
-  }
-
-  .home-content-container button {
-    width: 360px;
   }
 
   .home-image-container {
