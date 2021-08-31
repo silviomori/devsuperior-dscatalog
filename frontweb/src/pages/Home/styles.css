@@ -4,12 +4,14 @@
   text-align: center;
 }
 
+.base-card {
+  border-radius: 20px;
+}
+
 .home-card {
   display: flex;
   flex-direction: column-reverse;
   background-color: #fff;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
 }
 
 .home-content-container {
