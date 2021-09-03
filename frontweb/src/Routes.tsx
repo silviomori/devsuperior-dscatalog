@@ -1,4 +1,5 @@
 import Navbar from 'components/Navbar';
+import Admin from 'pages/Admin';
 import Catalog from 'pages/Catalog';
 import Home from 'pages/Home';
 import ProductDetails from 'pages/ProductDetails';
@@ -16,6 +17,9 @@ const Routes = () => (
       </Route>
       <Route path="/products/:productId">
         <ProductDetails />
+      </Route>
+      <Route path="/admin">
+        <Admin />
       </Route>
     </Switch>
   </BrowserRouter>
