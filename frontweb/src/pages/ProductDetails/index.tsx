@@ -2,6 +2,7 @@ import './styles.css';
 import { ReactComponent as ArrowIcon } from 'assets/images/arrow.svg';
 import { Product } from 'types/product';
 import ProductPrice from 'components/ProductPrice';
+import { Link } from 'react-router-dom';
 
 const product: Product = {
   id: 1,
@@ -24,10 +25,12 @@ const ProductDetails = () => {
   return (
     <div className="product-details-container">
       <div className="base-card product-details-card">
-        <div className="goback-container">
-          <ArrowIcon />
-          <h1>Back</h1>
-        </div>
+        <Link to="/products">
+          <div className="goback-container">
+            <ArrowIcon />
+            <h1>Back</h1>
+          </div>
+        </Link>
         <div className="row">
           <div className="col-xl-6">
             <div className="product-details-img-container">

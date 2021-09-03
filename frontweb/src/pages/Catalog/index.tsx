@@ -1,5 +1,8 @@
+import './styles.css';
 import ProductCard from 'components/ProductCard';
+import { Link } from 'react-router-dom';
 import { Product } from 'types/product';
+import Pagination from 'components/Pagination';
 
 const Catalog = () => {
   const product: Product = {
@@ -20,26 +23,44 @@ const Catalog = () => {
   };
 
   return (
-    <div className="my-4 container">
+    <div className="my-4 container catalog-container">
+      <div className="row catalog-title-container">
+        <h1>Product catalog</h1>
+      </div>
       <div className="row">
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to="/products/1">
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to="/products/1">
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to="/products/1">
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to="/products/1">
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to="/products/1">
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to="/products/1">
+            <ProductCard product={product} />
+          </Link>
         </div>
+      </div>
+      <div className="row">
+        <Pagination />
       </div>
     </div>
   );
