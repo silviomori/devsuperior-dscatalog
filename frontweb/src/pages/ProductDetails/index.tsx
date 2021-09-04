@@ -2,26 +2,25 @@ import './styles.css';
 import { ReactComponent as ArrowIcon } from 'assets/images/arrow.svg';
 import { Product } from 'types/product';
 import ProductPrice from 'components/ProductPrice';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { BASE_URL } from 'util/requests';
+import { useEffect, useState } from 'react';
 
-const product: Product = {
-  id: 1,
-  name: 'The Lord of the Rings',
-  description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  price: 90.5,
-  imgUrl:
-    'https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg',
-  date: '2020-07-13T20:50:07.123450Z',
-  categories: [
-    {
-      id: 2,
-      name: 'Eletrônicos',
-    },
-  ],
+type UrlParams = {
+  productId: string;
 };
 
 const ProductDetails = () => {
+  const { productId } = useParams<UrlParams>();
+  const [product, setProduct] = useState<Product>();
+  useEffect(() => {
+    axios.get(`${BASE_URL}/products/${productId}`).then((response) => {
+      console.log(response.data);
+      setProduct(response.data);
+    });
+  }, [productId]);
+
   return (
     <div className="product-details-container">
       <div className="base-card product-details-card">
@@ -34,17 +33,17 @@ const ProductDetails = () => {
         <div className="row">
           <div className="col-xl-6">
             <div className="product-details-img-container">
-              <img src={product.imgUrl} alt={product.name} />
+              <img src={product?.imgUrl} alt={product?.name} />
             </div>
             <div className="product-details-name-price-container">
-              <h1>{product.name}</h1>
-              <ProductPrice price={product.price} />
+              <h1>{product?.name}</h1>
+              {product && <ProductPrice price={product.price} />}
             </div>
           </div>
           <div className="col-xl-6">
             <div className="product-details-description-container">
               <h1>Product description</h1>
-              <p>{product.description}</p>
+              <p>{product?.description}</p>
             </div>
           </div>
         </div>
