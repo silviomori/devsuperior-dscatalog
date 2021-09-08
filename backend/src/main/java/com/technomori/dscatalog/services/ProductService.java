@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.technomori.dscatalog.dto.ProductDTO;
+import com.technomori.dscatalog.entities.Category;
 import com.technomori.dscatalog.entities.Product;
 import com.technomori.dscatalog.exceptions.DatabaseException;
 import com.technomori.dscatalog.exceptions.ResourceNotFoundException;
@@ -27,8 +28,14 @@ public class ProductService {
 
 	@Transactional(readOnly = true)
 	public Page<ProductDTO> findAllPaged(PageRequest pageRequest) {
+		return findAllPaged(0L, pageRequest);
+	}
+
+	@Transactional(readOnly = true)
+	public Page<ProductDTO> findAllPaged(Long categoryId, PageRequest pageRequest) {
+		Category category = categoryId == 0 ? null : categoryRepository.getOne(categoryId);
 		return productRepository
-					.findAll(pageRequest)
+					.find(category, pageRequest)
 					.map(item -> new ProductDTO(item));
 	}
 
