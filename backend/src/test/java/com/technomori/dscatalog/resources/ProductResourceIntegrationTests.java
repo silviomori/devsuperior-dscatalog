@@ -16,15 +16,18 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.technomori.dscatalog.dto.ProductDTO;
 import com.technomori.dscatalog.helpers.Factory;
+import com.technomori.dscatalog.tests.TokenUtil;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
 public class ProductResourceIntegrationTests {
+
+	@Autowired
+	private TokenUtil tokenUtil;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -35,6 +38,8 @@ public class ProductResourceIntegrationTests {
 	private Long nonExistingId;
 	private Long countTotalProducts;
 	private ProductDTO productDTO;
+	private String username;
+	private String password;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -42,12 +47,14 @@ public class ProductResourceIntegrationTests {
 		nonExistingId = -1L;
 		countTotalProducts = 25L;
 		productDTO = Factory.createProductDTO();
+		username = "maria@gmail.com";
+		password = "123456";
 	}
 
 	@Test
 	public void findAllShouldReturnSortedPageWhenSortByName() {
 		assertDoesNotThrow(() -> mockMvc
-			.perform(get("/products?page=0&linesPerPage=12&direction=ASC&orderBy=name").accept(MediaType.APPLICATION_JSON))
+			.perform(get("/products?page=0&size=12&sort=name,ASC").accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.totalElements").value(countTotalProducts))
 			.andExpect(jsonPath("$.content").exists())
@@ -57,11 +64,13 @@ public class ProductResourceIntegrationTests {
 	}
 
 	@Test
-	public void updateShouldReturnProductDTOWhenIdExists() throws JsonProcessingException {
+	public void updateShouldReturnProductDTOWhenIdExists() throws Exception {
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 		String jsonBody = objMapper.writeValueAsString(productDTO);
 
 		Assertions.assertDoesNotThrow(() -> mockMvc
 			.perform(put("/products/{id}", existingId)
+					.header("Authorization", "Bearer " + accessToken)
 					.content(jsonBody)
 					.contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON))
@@ -72,11 +81,13 @@ public class ProductResourceIntegrationTests {
 	}
 
 	@Test
-	public void updateShouldReturnNotFoundWhenIdDoesNotExist() throws JsonProcessingException {
+	public void updateShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 		String jsonBody = objMapper.writeValueAsString(productDTO);
 
 		Assertions.assertDoesNotThrow(() -> mockMvc
 			.perform(put("/products/{id}", nonExistingId)
+					.header("Authorization", "Bearer " + accessToken)
 					.content(jsonBody)
 					.contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON))

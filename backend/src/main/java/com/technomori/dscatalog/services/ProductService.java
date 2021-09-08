@@ -30,11 +30,6 @@ public class ProductService {
 	private CategoryRepository categoryRepository;
 
 	@Transactional(readOnly = true)
-	public Page<ProductDTO> findAllPaged(Pageable pageable) {
-		return findAllPaged(null, null, pageable);
-	}
-
-	@Transactional(readOnly = true)
 	public Page<ProductDTO> findAllPaged(List<Long> categoryIds, String name, Pageable pageable) {
 		List<Category> categories = categoryIds == null || categoryIds.isEmpty() ? null :
 			categoryIds.stream()
