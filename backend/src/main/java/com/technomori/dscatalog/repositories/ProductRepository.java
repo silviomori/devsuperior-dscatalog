@@ -10,7 +10,9 @@ import com.technomori.dscatalog.entities.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-	@Query("SELECT p FROM Product p WHERE (:category IS NULL OR :category MEMBER OF p.categories)")
-	Page<Product> find(Category category, Pageable pageable);
+	@Query("SELECT p FROM Product p WHERE"
+			+ " (:category IS NULL OR :category MEMBER OF p.categories) AND"
+			+ " (LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%')))")
+	Page<Product> find(Category category, String name, Pageable pageable);
 
 }

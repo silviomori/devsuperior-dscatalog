@@ -28,14 +28,15 @@ public class ProductService {
 
 	@Transactional(readOnly = true)
 	public Page<ProductDTO> findAllPaged(Pageable pageable) {
-		return findAllPaged(0L, pageable);
+		return findAllPaged(0L, null, pageable);
 	}
 
 	@Transactional(readOnly = true)
-	public Page<ProductDTO> findAllPaged(Long categoryId, Pageable pageable) {
+	public Page<ProductDTO> findAllPaged(Long categoryId, String name, Pageable pageable) {
 		Category category = categoryId == 0 ? null : categoryRepository.getOne(categoryId);
+		name = name == null ? "" : name.trim();
 		return productRepository
-					.find(category, pageable)
+					.find(category, name, pageable)
 					.map(item -> new ProductDTO(item));
 	}
 
