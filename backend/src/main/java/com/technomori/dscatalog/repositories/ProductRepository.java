@@ -1,5 +1,7 @@
 package com.technomori.dscatalog.repositories;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,9 +12,11 @@ import com.technomori.dscatalog.entities.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-	@Query("SELECT p FROM Product p WHERE"
-			+ " (:category IS NULL OR :category MEMBER OF p.categories) AND"
-			+ " (LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%')))")
-	Page<Product> find(Category category, String name, Pageable pageable);
+	@Query("SELECT DISTINCT p FROM Product p"
+			+ " INNER JOIN p.categories cats"
+			+ " WHERE"
+			+ " 	(COALESCE(:categories) IS NULL OR cats IN :categories) AND"
+			+ " 	(:name = '' OR LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%')))")
+	Page<Product> find(List<Category> categories, String name, Pageable pageable);
 
 }

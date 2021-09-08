@@ -1,5 +1,8 @@
 package com.technomori.dscatalog.services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +31,18 @@ public class ProductService {
 
 	@Transactional(readOnly = true)
 	public Page<ProductDTO> findAllPaged(Pageable pageable) {
-		return findAllPaged(0L, null, pageable);
+		return findAllPaged(null, null, pageable);
 	}
 
 	@Transactional(readOnly = true)
-	public Page<ProductDTO> findAllPaged(Long categoryId, String name, Pageable pageable) {
-		Category category = categoryId == 0 ? null : categoryRepository.getOne(categoryId);
+	public Page<ProductDTO> findAllPaged(List<Long> categoryIds, String name, Pageable pageable) {
+		List<Category> categories = categoryIds == null || categoryIds.isEmpty() ? null :
+			categoryIds.stream()
+				.map(id -> categoryRepository.getOne(id))
+				.collect(Collectors.toList());
 		name = name == null ? "" : name.trim();
 		return productRepository
-					.find(category, name, pageable)
+					.find(categories, name, pageable)
 					.map(item -> new ProductDTO(item));
 	}
 

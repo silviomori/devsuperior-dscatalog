@@ -1,6 +1,7 @@
 package com.technomori.dscatalog.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -32,9 +33,9 @@ public class ProductResource {
 
 	@GetMapping
 	public ResponseEntity<Page<ProductDTO>> findAllPaged(@PageableDefault Pageable pageable,
-			@RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
+			@RequestParam(value = "categoryId", defaultValue = "") List<Long> categoryIds,
 			@RequestParam(value = "name", defaultValue = "") String name) {
-		Page<ProductDTO> productPage = productService.findAllPaged(categoryId, name, pageable);
+		Page<ProductDTO> productPage = productService.findAllPaged(categoryIds, name, pageable);
 		return ResponseEntity.ok().body(productPage);
 	}
 
