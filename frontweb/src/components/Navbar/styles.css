@@ -26,3 +26,32 @@
     color: rgb(255, 255, 255);
     font-weight: 700;
 }
+
+.login-container {
+    display: none;
+    color: #FFF;
+}
+
+.username-container {
+    display: none;
+    color: #FFF;
+}
+
+@media (min-width: 768px) {
+    .login-container {
+        display: unset;
+        margin-right: 10px;
+    }
+}
+
+@media (min-width: 992px) {
+    .login-container {
+        display: unset;
+        margin-right: 40px;
+    }
+    
+    .username-container {
+        display: unset;
+        margin-right: 20px;
+    }
+}
