@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router';
-import Form from './Form';
-import List from './List';
+import Form from './ProductCrudForm';
+import List from './ProductCrudList';
 import './styles.css';
 
 const Products = () => {

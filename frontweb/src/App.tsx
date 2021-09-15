@@ -11,7 +11,7 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={{ authContextData, setAuthContextData }}>
-      <Routes />;
+      <Routes />
     </AuthContext.Provider>
   );
 };

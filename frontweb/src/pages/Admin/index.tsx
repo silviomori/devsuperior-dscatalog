@@ -9,7 +9,7 @@ const Admin = () => {
   return (
     <div className="admin-container">
       <Navbar />
-      <div className="content-container">
+      <div className="admin-content">
         <Switch>
           <PrivateRoute path="/admin/products">
             <Products />
