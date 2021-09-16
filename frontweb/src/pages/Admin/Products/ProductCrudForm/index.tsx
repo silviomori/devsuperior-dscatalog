@@ -1,29 +1,55 @@
 import { AxiosRequestConfig } from 'axios';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Product } from 'types/product';
 import { requestBackend } from 'util/requests';
 import './styles.css';
 
+type UrlParams = {
+  productId: string;
+};
+
 const ProductCrudForm = () => {
   const history = useHistory();
+
+  const { productId } = useParams<UrlParams>();
+  const isEditing = productId !== 'create';
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<Product>();
 
+  useEffect(() => {
+    if (isEditing) {
+      requestBackend({ url: `/products/${productId}` })
+        .then((response) => {
+          const product = response.data as Product;
+          setValue('name', product.name);
+          setValue('categories', product.categories);
+          setValue('price', product.price);
+          setValue('imgUrl', product.imgUrl);
+          setValue('description', product.description);
+        })
+        .catch((error) => console.log('error: ', error));
+    }
+  }, [productId, isEditing, setValue]);
+
   const onSubmit = (product: Product) => {
-    product = {
-      ...product,
-      imgUrl:
-        'https://www.clipartmax.com/png/full/177-1776045_product-image-box-icon-png.png',
-      categories: [{ id: 1, name: '' }],
-    };
+    if (!isEditing) {
+      product = {
+        ...product,
+        imgUrl:
+          'https://www.clipartmax.com/png/full/177-1776045_product-image-box-icon-png.png',
+        categories: [{ id: 1, name: '' }],
+      };
+    }
     const config: AxiosRequestConfig = {
-      method: 'POST',
-      url: '/products',
+      method: isEditing ? 'PUT' : 'POST',
+      url: isEditing ? `/products/${productId}` : '/products',
       data: product,
       withCredentials: true,
     };
