@@ -1,8 +1,28 @@
+import { AxiosRequestConfig } from 'axios';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Product } from 'types/product';
+import { SpringPage } from 'types/vendor/spring';
+import { requestBackend } from 'util/requests';
 import ProductCrudCard from '../ProductCrudCard';
 import './styles.css';
 
 const ProductCrudList = () => {
+  const [page, setPage] = useState<SpringPage<Product>>();
+  useEffect(() => {
+    const config: AxiosRequestConfig = {
+      method: 'GET',
+      url: '/products',
+      params: {
+        page: 0,
+        size: 12,
+      },
+    };
+    requestBackend(config).then((response) => {
+      setPage(response.data);
+    });
+  }, []);
+
   return (
     <>
       <div className="product-crud-header-container">
@@ -16,24 +36,12 @@ const ProductCrudList = () => {
         </div>
       </div>
       <div className="row">
-        <div className="col-sm-6 col-md-12">
-          <ProductCrudCard />
-        </div>
-        <div className="col-sm-6 col-md-12">
-          <ProductCrudCard />
-        </div>
-        <div className="col-sm-6 col-md-12">
-          <ProductCrudCard />
-        </div>
-        <div className="col-sm-6 col-md-12">
-          <ProductCrudCard />
-        </div>
-        <div className="col-sm-6 col-md-12">
-          <ProductCrudCard />
-        </div>
-        <div className="col-sm-6 col-md-12">
-          <ProductCrudCard />
-        </div>
+        {page &&
+          page.content.map((product) => (
+            <div className="col-sm-6 col-md-12" key={product.id}>
+              <ProductCrudCard product={product} />
+            </div>
+          ))}
       </div>
     </>
   );

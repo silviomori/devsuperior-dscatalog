@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
@@ -48,6 +49,8 @@ public class ProductDTO implements Serializable {
 		this.price = productEntity.getPrice();
 		this.imgUrl = productEntity.getImgUrl();
 		this.date = productEntity.getDate();
+		categories = productEntity.getCategories().stream()
+				.map(CategoryDTO::new).collect(Collectors.toSet());
 	}
 
 	public ProductDTO(Product productEntity, Set<Category> categoriesEntity) {
