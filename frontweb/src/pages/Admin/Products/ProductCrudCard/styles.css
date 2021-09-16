@@ -4,20 +4,17 @@
 }
 
 .product-crud-card-image-container {
+  width: auto;
+  height: 190px;
   display: flex;
   justify-content: center;
   padding: 15px;
-  border-bottom: 1px solid #e1e1e1;
-}
-
-.product-crud-card-image-container img {
-  height: 100%;
-  max-height: 160px;
 }
 
 .product-crud-card-details-container {
   text-align: left;
   padding: 15px;
+  border-top: 1px solid #e1e1e1;
 }
 
 .product-crud-card-details-container h6 {
@@ -58,9 +55,9 @@
   }
 
   .product-crud-card-image-container {
+    width: 190px;
+    height: auto;
     padding: 25px;
-    border-bottom: unset;
-    border-right: 1px solid #e1e1e1;
   }
 
   .product-crud-card-details-container {
@@ -69,6 +66,7 @@
     flex-direction: column;
     justify-content: center;
     padding: 25px;
+    border-left: 1px solid #e1e1e1;
   }
 
   .product-crud-card-categories-container {

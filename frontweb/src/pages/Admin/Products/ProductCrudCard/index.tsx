@@ -12,7 +12,7 @@ const ProductCrudCard = ({ product }: Props) => {
   return (
     <div className="base-card product-crud-card-container">
       <div className="product-crud-card-image-container">
-        <img src={product.imgUrl}></img>
+        <img className="img-fluid" src={product.imgUrl}></img>
       </div>
       <div className="product-crud-card-details-container">
         <h6>{product.name}</h6>

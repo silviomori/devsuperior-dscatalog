@@ -15,7 +15,7 @@ const ProductCrudList = () => {
       url: '/products',
       params: {
         page: 0,
-        size: 12,
+        size: 100,
       },
     };
     requestBackend(config).then((response) => {
