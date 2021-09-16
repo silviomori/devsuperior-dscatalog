@@ -6,6 +6,8 @@ import { requestBackend } from 'util/requests';
 import './styles.css';
 
 const ProductCrudForm = () => {
+  const history = useHistory();
+
   const {
     register,
     handleSubmit,
@@ -26,11 +28,12 @@ const ProductCrudForm = () => {
       withCredentials: true,
     };
     requestBackend(config)
-      .then((response) => {})
+      .then((response) => {
+        history.push('/admin/products');
+      })
       .catch((error) => console.log('error: ', error));
   };
 
-  const history = useHistory();
   const handleCancel = () => {
     history.push('/admin/products');
   };
