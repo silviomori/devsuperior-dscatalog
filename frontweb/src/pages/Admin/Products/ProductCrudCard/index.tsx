@@ -8,11 +8,12 @@ import { requestBackend } from 'util/requests';
 
 type Props = {
   product: Product;
+  onDelete: Function;
 };
 
-const ProductCrudCard = ({ product }: Props) => {
+const ProductCrudCard = ({ product, onDelete }: Props) => {
   const handleDelete = (productId: number) => {
-    if (!window.confirm("Are you sure you want to delete this product?")) {
+    if (!window.confirm('Are you sure you want to delete this product?')) {
       return;
     }
     const config: AxiosRequestConfig = {
@@ -21,7 +22,7 @@ const ProductCrudCard = ({ product }: Props) => {
       withCredentials: true,
     };
     requestBackend(config).then(() => {
-      console.log('Product deleted.');
+      onDelete();
     });
   };
 
