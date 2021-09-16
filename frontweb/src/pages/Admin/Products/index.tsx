@@ -5,14 +5,16 @@ import './styles.css';
 
 const Products = () => {
   return (
-    <Switch>
-      <Route path="/admin/products" exact>
-        <List />
-      </Route>
-      <Route path="/admin/products/:productId">
-        <Form />
-      </Route>
-    </Switch>
+    <div className="product-crud-container">
+      <Switch>
+        <Route path="/admin/products" exact>
+          <List />
+        </Route>
+        <Route path="/admin/products/:productId">
+          <Form />
+        </Route>
+      </Switch>
+    </div>
   );
 };
 
