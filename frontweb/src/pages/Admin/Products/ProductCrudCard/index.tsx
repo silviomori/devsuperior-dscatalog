@@ -45,11 +45,11 @@ const ProductCrudCard = ({ product, onDelete }: Props) => {
             ))}
         </div>
       </div>
-      <div
-        className="product-crud-card-buttons-container"
-        onClick={() => handleDelete(product.id)}
-      >
-        <button className="btn btn-outline-danger product-crud-card-button">
+      <div className="product-crud-card-buttons-container">
+        <button
+          className="btn btn-outline-danger product-crud-card-button"
+          onClick={() => handleDelete(product.id)}
+        >
           Delete
         </button>
         <Link to={`/admin/products/${product.id}`}>
