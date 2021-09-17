@@ -2,7 +2,7 @@ import './styles.css';
 import ProductPrice from 'components/ProductPrice';
 import CategoryBadge from '../CategoryBadge';
 import { Product } from 'types/product';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
 
@@ -24,6 +24,12 @@ const ProductCrudCard = ({ product, onDelete }: Props) => {
     requestBackend(config).then(() => {
       onDelete();
     });
+  };
+
+  const history = useHistory();
+  const handleEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    history.push(`/admin/products/${product.id}`);
   };
 
   return (
@@ -52,11 +58,12 @@ const ProductCrudCard = ({ product, onDelete }: Props) => {
         >
           Delete
         </button>
-        <Link to={`/admin/products/${product.id}`}>
-          <button className="btn btn-outline-secondary product-crud-card-button">
-            Edit
-          </button>
-        </Link>
+        <button
+          className="btn btn-outline-secondary product-crud-card-button"
+          onClick={handleEdit}
+        >
+          Edit
+        </button>
       </div>
     </div>
   );

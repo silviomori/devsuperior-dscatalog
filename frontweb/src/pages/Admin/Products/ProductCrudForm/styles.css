@@ -68,6 +68,11 @@
   display: none;
 }
 
+.product-crud-form-input-select .form-control{
+  padding: 0;
+  border-radius: 10px !important;
+}
+
 @media (min-width: 768px) {
   .product-crud-form-image-preview {
     margin-bottom: 0;

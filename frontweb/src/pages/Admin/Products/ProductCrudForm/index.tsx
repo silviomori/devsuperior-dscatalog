@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import { Product } from 'types/product';
 import { requestBackend } from 'util/requests';
@@ -25,6 +25,7 @@ const ProductCrudForm = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    control,
   } = useForm<Product>();
 
   useEffect(() => {
@@ -70,7 +71,8 @@ const ProductCrudForm = () => {
       .catch((error) => console.log('error: ', error));
   };
 
-  const handleCancel = () => {
+  const handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     history.push('/admin/products');
   };
 
@@ -96,14 +98,28 @@ const ProductCrudForm = () => {
                 {errors.name?.message}
               </div>
             </div>
-            <div className="product-crud-form-input">
-              <Select
-                classNamePrefix="product-crud-select"
-                options={selectCategories}
-                isMulti
-                getOptionLabel={(category: Category) => category.name}
-                getOptionValue={(category: Category) => String(category.id)}
+            <div className="product-crud-form-input product-crud-form-input-select">
+              <Controller
+                name="categories"
+                rules={{ required: true }}
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    className={`form-control ${
+                      errors.categories ? 'is-invalid' : ''
+                    }`}
+                    classNamePrefix="product-crud-select"
+                    options={selectCategories}
+                    isMulti
+                    getOptionLabel={(category: Category) => category.name}
+                    getOptionValue={(category: Category) => String(category.id)}
+                  />
+                )}
               />
+              {errors.categories && (
+                <div className="invalid-feedback d-block">Required field</div>
+              )}
             </div>
             <div className="product-crud-form-input">
               <input

@@ -44,6 +44,7 @@
   font-weight: bold;
   line-height: 19px;
   letter-spacing: -0.015em;
+  text-transform: uppercase;
   border-radius: 10px;
 }
 
@@ -79,7 +80,6 @@
   }
 
   .product-crud-card-button {
-    text-transform: uppercase;
     width: 100%;
   }
 }
