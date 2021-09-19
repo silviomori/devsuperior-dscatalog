@@ -7,6 +7,7 @@ import { Product } from 'types/product';
 import { requestBackend } from 'util/requests';
 import { Category } from 'types/category';
 import Select from 'react-select';
+import { toast } from 'react-toastify';
 import './styles.css';
 
 type UrlParams = {
@@ -58,10 +59,14 @@ const ProductCrudForm = () => {
       withCredentials: true,
     };
     requestBackend(config)
-      .then((response) => {
+      .then(() => {
+        toast.info('Product created.');
         history.push('/admin/products');
       })
-      .catch((error) => console.log('error: ', error));
+      .catch((error) => {
+        console.log('error: ', error)
+        toast.error('An error occurred while creating the product.');
+      });
   };
 
   const handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
