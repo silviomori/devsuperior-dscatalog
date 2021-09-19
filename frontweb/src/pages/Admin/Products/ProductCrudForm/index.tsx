@@ -1,5 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
+import CurrencyInput from 'react-currency-input-field';
 import { useForm, Controller } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import { Product } from 'types/product';
@@ -50,8 +51,6 @@ const ProductCrudForm = () => {
   }, []);
 
   const onSubmit = (product: Product) => {
-
-          
     const config: AxiosRequestConfig = {
       method: isEditing ? 'PUT' : 'POST',
       url: isEditing ? `/products/${productId}` : '/products',
@@ -116,16 +115,20 @@ const ProductCrudForm = () => {
               )}
             </div>
             <div className="product-crud-form-input">
-              <input
-                {...register('price', {
-                  required: 'Required field',
-                })}
-                type="text"
-                className={`form-control base-input ${
-                  errors.price ? 'is-invalid' : ''
-                }`}
-                placeholder="Price"
+              <Controller
                 name="price"
+                rules={{ required: 'Required field' }}
+                control={control}
+                render={({ field }) => (
+                  <CurrencyInput
+                    placeholder="Price"
+                    className={`form-control base-input ${
+                      errors.price ? 'is-invalid' : ''
+                    }`}
+                    value={field.value}
+                    onValueChange={field.onChange}
+                  />
+                )}
               />
               <div className="invalid-feedback d-block">
                 {errors.price?.message}
@@ -154,8 +157,8 @@ const ProductCrudForm = () => {
                   required: 'Required field',
                   pattern: {
                     value: /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm,
-                    message: 'Invalid URL'
-                  }
+                    message: 'Invalid URL',
+                  },
                 })}
                 type="text"
                 className={`form-control base-input ${
