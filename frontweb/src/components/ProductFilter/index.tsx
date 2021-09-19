@@ -8,19 +8,29 @@ import { requestBackend } from 'util/requests';
 
 type ProductFilterData = {
   name: string;
-  category: Category;
+  category: Category | null;
 };
 
 const ProductFilter = () => {
   const [selectCategories, setSelectCategories] = useState<Category[]>();
-  const {
-    register,
-    handleSubmit,
-    control,
-  } = useForm<ProductFilterData>();
+  const { register, handleSubmit, control, setValue, getValues } =
+    useForm<ProductFilterData>();
 
   const onSubmit = (formData: ProductFilterData) => {
     console.log(formData);
+  };
+
+  const handleFormClear = () => {
+    setValue('name', '');
+    setValue('category', null);
+  };
+
+  const handleChangeCategory = (value: Category) => {
+    setValue('category', value);
+    const obj: ProductFilterData = {
+      name: getValues('name'),
+      category: getValues('category'),
+    };
   };
 
   useEffect(() => {
@@ -56,13 +66,19 @@ const ProductFilter = () => {
                   classNamePrefix="product-filter-select"
                   options={selectCategories}
                   isClearable
+                  onChange={(value) => handleChangeCategory(value as Category)}
                   getOptionLabel={(category: Category) => category.name}
                   getOptionValue={(category: Category) => String(category.id)}
                 />
               )}
             />{' '}
           </div>
-          <button className="btn btn-outline-secondary">Clear</button>
+          <button
+            className="btn btn-outline-secondary"
+            onClick={handleFormClear}
+          >
+            Clear
+          </button>
         </div>
       </form>
     </div>
