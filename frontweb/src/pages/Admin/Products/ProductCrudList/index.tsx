@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import Pagination from 'components/Pagination';
-import ProductFilter from 'components/ProductFilter';
+import ProductFilter, { ProductFilterData } from 'components/ProductFilter';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from 'types/product';
@@ -11,6 +11,7 @@ import './styles.css';
 
 type SubcomponentState = {
   activePage: number;
+  filterData: ProductFilterData;
 };
 
 const ProductCrudList = () => {
@@ -18,6 +19,7 @@ const ProductCrudList = () => {
   const [subcomponentState, setSubcomponentState] = useState<SubcomponentState>(
     {
       activePage: 0,
+      filterData: { name: '', category: null },
     }
   );
 
@@ -28,6 +30,8 @@ const ProductCrudList = () => {
       params: {
         page: subcomponentState.activePage,
         size: 6,
+        name: subcomponentState.filterData.name,
+        categoryId: subcomponentState.filterData.category?.id,
       },
     };
     requestBackend(config).then((response) => {
@@ -38,7 +42,14 @@ const ProductCrudList = () => {
   useEffect(getProducts, [getProducts]);
 
   const handlePageChange = (pageNumber: number) => {
-    setSubcomponentState({ activePage: pageNumber });
+    setSubcomponentState({
+      activePage: pageNumber,
+      filterData: subcomponentState.filterData,
+    });
+  };
+
+  const handleFilterSubmit = (data: ProductFilterData) => {
+    setSubcomponentState({ activePage: 0, filterData: data });
   };
 
   return (
@@ -49,7 +60,7 @@ const ProductCrudList = () => {
             New Product
           </button>
         </Link>
-        <ProductFilter />
+        <ProductFilter onFilterSubmit={handleFilterSubmit} />
       </div>
       <div className="row">
         {page &&
@@ -63,6 +74,7 @@ const ProductCrudList = () => {
         pageCount={page ? page.totalPages : 0}
         range={3}
         onChange={handlePageChange}
+        forcePage={page?.number}
       />
     </>
   );

@@ -6,18 +6,22 @@ import Select from 'react-select';
 import { useEffect, useState } from 'react';
 import { requestBackend } from 'util/requests';
 
-type ProductFilterData = {
+export type ProductFilterData = {
   name: string;
   category: Category | null;
 };
 
-const ProductFilter = () => {
+type Props = {
+  onFilterSubmit: (data: ProductFilterData) => void;
+};
+
+const ProductFilter = ({ onFilterSubmit }: Props) => {
   const [selectCategories, setSelectCategories] = useState<Category[]>();
   const { register, handleSubmit, control, setValue, getValues } =
     useForm<ProductFilterData>();
 
   const onSubmit = (formData: ProductFilterData) => {
-    console.log(formData);
+    onFilterSubmit(formData);
   };
 
   const handleFormClear = () => {
@@ -31,6 +35,7 @@ const ProductFilter = () => {
       name: getValues('name'),
       category: getValues('category'),
     };
+    onFilterSubmit(obj);
   };
 
   useEffect(() => {
