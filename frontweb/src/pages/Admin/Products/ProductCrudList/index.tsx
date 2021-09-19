@@ -11,13 +11,13 @@ import './styles.css';
 const ProductCrudList = () => {
   const [page, setPage] = useState<SpringPage<Product>>();
 
-  const getProducts = () => {
+  const getProducts = (pageNumber: number) => {
     const config: AxiosRequestConfig = {
       method: 'GET',
       url: '/products',
       params: {
-        page: 0,
-        size: 100,
+        page: pageNumber,
+        size: 6,
       },
     };
     requestBackend(config).then((response) => {
@@ -26,7 +26,7 @@ const ProductCrudList = () => {
   };
 
   useEffect(() => {
-    getProducts();
+    getProducts(0);
   }, []);
 
   return (
@@ -45,11 +45,11 @@ const ProductCrudList = () => {
         {page &&
           page.content.map((product) => (
             <div className="col-sm-6 col-md-12" key={product.id}>
-              <ProductCrudCard product={product} onDelete={getProducts} />
+              <ProductCrudCard product={product} onDelete={() => getProducts(page.number)} />
             </div>
           ))}
       </div>
-      <Pagination />
+      <Pagination pageCount={page ? page.totalPages : 0} range={3} onChange={getProducts} />
     </>
   );
 };
