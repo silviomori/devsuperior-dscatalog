@@ -1,14 +1,11 @@
-ul {
-  display: flex;
-  justify-content: space-around;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
 .admin-nav-container {
   padding: 10px;
   background-color: #fff;
+}
+
+.admin-nav-items-container {
+  display: flex;
+  justify-content: space-around;
 }
 
 .admin-nav-item {
@@ -44,15 +41,15 @@ ul {
 }
 
 @media (min-width: 1200px) {
-  ul {
-    flex-direction: column;
-    justify-content: unset;
-  }
-
   .admin-nav-container {
     width: 300px;
     height: calc(100vh - 70px);
     padding: 0;
+  }
+
+  .admin-nav-items-container {
+    flex-direction: column;
+    justify-content: unset;
   }
 
   .admin-nav-item {
