@@ -50,14 +50,8 @@ const ProductCrudForm = () => {
   }, []);
 
   const onSubmit = (product: Product) => {
-    if (!isEditing) {
-      product = {
-        ...product,
-        imgUrl:
-          'https://www.clipartmax.com/png/full/177-1776045_product-image-box-icon-png.png',
-        categories: [{ id: 1, name: '' }],
-      };
-    }
+
+          
     const config: AxiosRequestConfig = {
       method: isEditing ? 'PUT' : 'POST',
       url: isEditing ? `/products/${productId}` : '/products',
@@ -137,7 +131,7 @@ const ProductCrudForm = () => {
                 {errors.price?.message}
               </div>
             </div>
-            <div className="row">
+            {/*<div className="row">
               <div className="col-sm-6">
                 <div>
                   <button className="btn btn-secondary text-white product-crud-form-upload-button">
@@ -151,6 +145,27 @@ const ProductCrudForm = () => {
               </div>
               <div className="col-sm-6 product-crud-form-image-preview">
                 Image preview
+              </div>
+            </div>*/}
+            <div className="product-crud-form-input">
+              {/* https://www.clipartmax.com/png/full/177-1776045_product-image-box-icon-png.png */}
+              <input
+                {...register('imgUrl', {
+                  required: 'Required field',
+                  pattern: {
+                    value: /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm,
+                    message: 'Invalid URL'
+                  }
+                })}
+                type="text"
+                className={`form-control base-input ${
+                  errors.imgUrl ? 'is-invalid' : ''
+                }`}
+                placeholder="Product image URL"
+                name="imgUrl"
+              />
+              <div className="invalid-feedback d-block">
+                {errors.imgUrl?.message}
               </div>
             </div>
           </div>
