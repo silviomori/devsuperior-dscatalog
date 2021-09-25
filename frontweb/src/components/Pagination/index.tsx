@@ -19,12 +19,23 @@ const Pagination = ({ pageCount, range, onChange, forcePage }: Props) => {
       pageLinkClassName="pagination-item"
       activeLinkClassName="pagination-link-active"
       breakClassName="pagination-item"
-      previousLabel={<div className="pagination-arrow-container"><ArrowSvg /></div>}
+      previousLabel={
+        <div
+          className="pagination-arrow-container"
+          data-testid="arrow-previous"
+        >
+          <ArrowSvg />
+        </div>
+      }
       previousClassName="arrow-previous"
-      nextLabel={<div className="pagination-arrow-container"><ArrowSvg /></div>}
+      nextLabel={
+        <div className="pagination-arrow-container" data-testid="arrow-next">
+          <ArrowSvg />
+        </div>
+      }
       nextClassName="arrow-next"
       disabledClassName="arrow-inactive"
-      onPageChange={(items) => onChange ? onChange(items.selected) : {}}
+      onPageChange={(items) => (onChange ? onChange(items.selected) : {})}
       forcePage={forcePage}
     />
   );
