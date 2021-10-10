@@ -91,12 +91,14 @@ const ProductCrudForm = () => {
                 }`}
                 placeholder="Product name"
                 name="name"
+                data-testid="name"
               />
               <div className="invalid-feedback d-block">
                 {errors.name?.message}
               </div>
             </div>
             <div className="product-crud-form-input product-crud-form-input-select">
+              <label htmlFor="categories" className="d-none">Categories</label>
               <Controller
                 name="categories"
                 rules={{ required: true }}
@@ -112,6 +114,7 @@ const ProductCrudForm = () => {
                     isMulti
                     getOptionLabel={(category: Category) => category.name}
                     getOptionValue={(category: Category) => String(category.id)}
+                    inputId="categories"
                   />
                 )}
               />
@@ -132,6 +135,7 @@ const ProductCrudForm = () => {
                     }`}
                     value={field.value}
                     onValueChange={field.onChange}
+                    data-testid="price"
                   />
                 )}
               />
@@ -171,6 +175,7 @@ const ProductCrudForm = () => {
                 }`}
                 placeholder="Product image URL"
                 name="imgUrl"
+                data-testid="imgUrl"
               />
               <div className="invalid-feedback d-block">
                 {errors.imgUrl?.message}
@@ -187,6 +192,7 @@ const ProductCrudForm = () => {
               }`}
               placeholder="Description"
               name="description"
+              data-testid="description"
             />
             <div className="invalid-feedback d-block">
               {errors.description?.message}
