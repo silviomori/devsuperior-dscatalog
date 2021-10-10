@@ -82,4 +82,44 @@ describe('Product Crud Form creation tests', () => {
     });
   });
 
+  test('should clear validation messages when filling out the form correctly', async () => {
+    render(
+      <Router history={history}>
+        <ProductCrudForm />
+      </Router>
+    );
+
+    const submitButton = screen.getByRole('button', { name: /save/i });
+
+    userEvent.click(submitButton);
+
+    await waitFor(() => {
+      const messages = screen.getAllByText('Required field');
+      expect(messages).toHaveLength(5);
+    });
+
+    const nameInput = screen.getByTestId('name');
+    const priceInput = screen.getByTestId('price');
+    const imgUrlInput = screen.getByTestId('imgUrl');
+    const descriptionInput = screen.getByTestId('description');
+    const categoriesInput = screen.getByLabelText('Categories');
+
+    await selectEvent.select(categoriesInput, ['Eletrônicos', 'Computadores']);
+    userEvent.type(nameInput, 'Desktop computer');
+    userEvent.type(priceInput, '1059.79');
+    userEvent.type(
+      imgUrlInput,
+      'https://www.clipartmax.com/png/full/177-1776045_product-image-box-icon-png.png'
+    );
+    userEvent.type(
+      descriptionInput,
+      'Affordable desktop computer for programmers.'
+    );
+
+    await waitFor(() => {
+      const messages = screen.queryAllByText('Required field');
+      expect(messages).toHaveLength(0);
+    });
+  });
+
 });
