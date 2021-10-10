@@ -28,6 +28,7 @@ describe('Product Crud Form creation tests', () => {
   beforeEach(() => {
     (useParams as jest.Mock).mockReturnValue({ productId: 'create' });
   });
+
   test('should show toast and redirect when product created', async () => {
     render(
       <Router history={history}>
@@ -63,4 +64,22 @@ describe('Product Crud Form creation tests', () => {
       expect(history.location.pathname).toEqual('/admin/products');
     });
   });
+
+  test('should show 5 validation messages when just clicking submit', async () => {
+    render(
+      <Router history={history}>
+        <ProductCrudForm />
+      </Router>
+    );
+
+    const submitButton = screen.getByRole('button', { name: /save/i });
+
+    userEvent.click(submitButton);
+
+    await waitFor(() => {
+      const messages = screen.getAllByText('Required field');
+      expect(messages).toHaveLength(5);
+    });
+  });
+
 });
