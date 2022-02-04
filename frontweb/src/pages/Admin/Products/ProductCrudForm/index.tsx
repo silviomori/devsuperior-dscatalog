@@ -77,7 +77,7 @@ const ProductCrudForm = () => {
   return (
     <div className="base-card product-crud-form-container">
       <h1>Product details</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} data-testid='form'>
         <div className="row">
           <div className="col-md-6">
             <div className="product-crud-form-input">
@@ -133,6 +133,7 @@ const ProductCrudForm = () => {
                     className={`form-control base-input ${
                       errors.price ? 'is-invalid' : ''
                     }`}
+                    disableGroupSeparators={true}
                     value={field.value}
                     onValueChange={field.onChange}
                     data-testid="price"
