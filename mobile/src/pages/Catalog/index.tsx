@@ -1,8 +1,9 @@
 import { Text, View } from "react-native";
+import { theme } from "../../styles";
 
 const Catalog: React.FC = () => {
   return (
-    <View>
+    <View style={theme.container}>
       <Text>Catalog</Text>
     </View>
   );

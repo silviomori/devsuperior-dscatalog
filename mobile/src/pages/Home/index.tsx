@@ -1,9 +1,10 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Text, TouchableOpacity, View } from "react-native";
+import { theme } from "../../styles";
 
 const Home: React.FC = ({ navigation }) => {
   return (
-    <View>
+    <View style={theme.container}>
       <Text>Welcome!</Text>
       <TouchableOpacity>
         <Text
