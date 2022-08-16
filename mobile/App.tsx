@@ -1,10 +1,12 @@
+import { NavigationContainer } from "@react-navigation/native";
 import { Text, View } from "react-native";
+import Routes from "./src/routes";
 
-const App = () => {
+const App: React.FC = () => {
   return (
-    <View>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <NavigationContainer>
+      <Routes />
+    </NavigationContainer>
   );
 };
 
