@@ -10,6 +10,7 @@ const colors = {
   secondary: "#33569B",
   bluePill: "#407BFF61",
   red: "#DF5753",
+  borderGray: "#e1e1e1",
 };
 
 const base = StyleSheet.create({
@@ -115,7 +116,7 @@ const theme = StyleSheet.create({
     marginBottom: 20,
   },
   productCardTopContainer: {
-    borderBottomColor: colors.lightGray,
+    borderBottomColor: colors.borderGray,
   },
   productCardTopContainerImage: {
     width: 180,
@@ -132,6 +133,18 @@ const theme = StyleSheet.create({
   productCardPriceContainer: {
     flexDirection: "row",
     marginTop: 10,
+  },
+  productFilterContainer: {
+    ...base.card,
+    height: 60,
+    marginVertical: 12,
+    paddingVertical: 10,
+  },
+  productFilterTextInput: {
+    width: "90%",
+    height: 40,
+    borderBottomWidth: 0.5,
+    borderBottomColor: colors.borderGray,
   },
 });
 
