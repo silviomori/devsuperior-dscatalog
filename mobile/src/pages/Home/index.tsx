@@ -1,26 +1,35 @@
+import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Text, TouchableOpacity, View } from "react-native";
-import { theme } from "../../styles";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { text, theme } from "../../styles";
 
-const Home: React.FC = ({ navigation }) => {
+import welcome from "../../../assets/images/welcome.png";
+import arrow from "../../../assets/icons/arrow.png";
+
+const Home: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
   return (
     <View style={theme.container}>
-      <Text>Welcome!</Text>
-      <TouchableOpacity>
-        <Text
-          style={{
-            textAlign: "center",
-            color: "#fff",
-            backgroundColor: "#069",
-            width: 150,
-            padding: 10,
-            borderRadius: 5,
-          }}
+      <View style={theme.card}>
+        <Image source={welcome} style={theme.welcomeImage} />
+        <View style={theme.textContainer}>
+          <Text style={theme.welcomeTitle}>Meet the best product catalog</Text>
+          <Text style={theme.welcomeDescription}>
+            We help you find the best products available on the market.
+          </Text>
+        </View>
+        <TouchableOpacity
+          style={theme.welcomeButton}
+          activeOpacity={0.8}
           onPress={() => navigation.navigate("Catalog")}
         >
-          Open Catalog
-        </Text>
-      </TouchableOpacity>
+          <Text style={theme.welcomeButtonText}>Start searching now</Text>
+          <View style={theme.welcomeButtonArrowContainer}>
+            <Image source={arrow} />
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
