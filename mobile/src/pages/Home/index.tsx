@@ -14,8 +14,8 @@ const Home: React.FC = () => {
       <View style={theme.card}>
         <Image source={welcome} style={theme.welcomeImage} />
         <View style={theme.textContainer}>
-          <Text style={theme.welcomeTitle}>Meet the best product catalog</Text>
-          <Text style={theme.welcomeDescription}>
+          <Text style={text.welcomeTitle}>Meet the best product catalog</Text>
+          <Text style={text.welcomeDescription}>
             We help you find the best products available on the market.
           </Text>
         </View>
@@ -24,9 +24,9 @@ const Home: React.FC = () => {
           activeOpacity={0.8}
           onPress={() => navigation.navigate("Catalog")}
         >
-          <Text style={theme.welcomeButtonText}>Start searching now</Text>
+          <Text style={text.welcomeButtonText}>Start searching now</Text>
           <View style={theme.welcomeButtonArrowContainer}>
-            <Image source={arrow} />
+            <Image source={arrow} style={theme.welcomeButtonArrowImage} />
           </View>
         </TouchableOpacity>
       </View>
