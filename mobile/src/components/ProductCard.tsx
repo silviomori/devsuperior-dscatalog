@@ -7,10 +7,19 @@ import {
 } from "react-native";
 import { text, theme } from "../styles";
 import { IProduct } from "../@types";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 const ProductCard: React.FC<IProduct> = ({ id, name, imgUrl, price }) => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
   return (
-    <TouchableOpacity style={theme.productCard}>
+    <TouchableOpacity
+      style={theme.productCard}
+      onPress={() => {
+        navigation.navigate("ProductDetails", { id });
+      }}
+    >
       {
         <View style={theme.productCardTopContainer}>
           <Image

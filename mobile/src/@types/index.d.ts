@@ -5,4 +5,7 @@ export interface IProduct {
   imgUrl: string;
   name: string;
   price: number;
+  description: string;
+  date: string;
+  categories: string[];
 }

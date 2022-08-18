@@ -4,7 +4,7 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { text, theme } from "../../styles";
 
 import welcome from "../../../assets/images/welcome.png";
-import arrow from "../../../assets/icons/arrow.png";
+import arrow from "../../../assets/icons/arrow_right_white.png";
 
 const Home: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();

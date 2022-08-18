@@ -65,6 +65,25 @@ const text = StyleSheet.create({
     fontSize: 30,
     color: colors.primary,
   },
+  productDetailsGoBack: {
+    ...base.textBold,
+    fontSize: 18,
+    textTransform: "uppercase",
+    color: colors.darkGray,
+    marginLeft: 16,
+  },
+  productDetailsName: {
+    ...base.textBold,
+    fontSize: 30,
+    color: colors.darkGray,
+  },
+  productDetailsDescription: {
+    ...base.textRegular,
+    fontSize: 16,
+    color: colors.mediumGray,
+    textAlign: "left",
+    marginBottom: 20,
+  },
 });
 
 const theme = StyleSheet.create({
@@ -145,6 +164,46 @@ const theme = StyleSheet.create({
     height: 40,
     borderBottomWidth: 0.5,
     borderBottomColor: colors.borderGray,
+  },
+  productDetailsContainer: {
+    padding: 10,
+    backgroundColor: colors.white,
+  },
+  productDetailsCard: {
+    ...base.card,
+    height: "100%",
+    backgroundColor: colors.white,
+    alignItems: "flex-start",
+    borderRadius: 20,
+    padding: 20,
+    flexGrow: 1,
+  },
+  productDetailsGoBackContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    marginBottom: 20,
+  },
+  productDetailsImgContainer: {
+    width: "100%",
+    alignItems: "center",
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: colors.borderGray,
+    marginBottom: 20,
+  },
+  productDetailsImage: {
+    height: 220,
+    width: 220,
+  },
+  productDetailsNamePriceContainer: {
+    marginBottom: 25,
+  },
+  productDetailsDescriptionContainer: {
+    width: "100%",
+    padding: 20,
+    borderRadius: 20,
+    borderWidth: 0.45,
   },
 });
 
