@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
+const deviceWidth = Dimensions.get("window").width;
 
 const colors = {
   white: "#FFFFFF",
@@ -207,4 +209,31 @@ const theme = StyleSheet.create({
   },
 });
 
-export { colors, theme, text };
+const nav = StyleSheet.create({
+  textLeft: {
+    ...base.textBold,
+    fontSize: 18,
+    color: colors.white,
+  },
+  optionsContainer: {
+    width: deviceWidth,
+    //height: 120,
+    color: colors.white,
+    backgroundColor: colors.primary,
+    //marginTop: 125,
+    marginRight: -16,
+    marginLeft: 20,
+  },
+  option: {
+    paddingVertical: 5,
+    paddingLeft: 15,
+  },
+  optionText: {
+    color: colors.white,
+  },
+  optionTextActive: {
+    fontWeight: "700",
+  },
+});
+
+export { colors, theme, text, nav };
