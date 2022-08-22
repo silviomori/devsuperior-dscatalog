@@ -9,3 +9,8 @@ export interface IProduct {
   date: string;
   categories: string[];
 }
+
+interface ILoginData {
+  username: string;
+  password: string;
+}

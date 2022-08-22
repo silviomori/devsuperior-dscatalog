@@ -14,19 +14,19 @@ const Home: React.FC = () => {
       <View style={theme.card}>
         <Image source={welcome} style={theme.welcomeImage} />
         <View style={theme.textContainer}>
-          <Text style={text.welcomeTitle}>Meet the best product catalog</Text>
+          <Text style={text.title}>Meet the best product catalog</Text>
           <Text style={text.welcomeDescription}>
             We help you find the best products available on the market.
           </Text>
         </View>
         <TouchableOpacity
-          style={theme.welcomeButton}
+          style={theme.arrowButton}
           activeOpacity={0.8}
           onPress={() => navigation.navigate("Catalog")}
         >
-          <Text style={text.welcomeButtonText}>Start searching now</Text>
-          <View style={theme.welcomeButtonArrowContainer}>
-            <Image source={arrow} style={theme.welcomeButtonArrowImage} />
+          <Text style={text.arrowButtonText}>Start searching now</Text>
+          <View style={theme.arrowButtonContainer}>
+            <Image source={arrow} style={theme.arrowButtonImage} />
           </View>
         </TouchableOpacity>
       </View>

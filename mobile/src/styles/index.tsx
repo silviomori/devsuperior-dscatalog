@@ -33,7 +33,7 @@ const base = StyleSheet.create({
 });
 
 const text = StyleSheet.create({
-  welcomeTitle: {
+  title: {
     ...base.textBold,
     color: colors.darkGray,
     marginBottom: 15,
@@ -42,7 +42,7 @@ const text = StyleSheet.create({
     ...base.textRegular,
     color: colors.mediumGray,
   },
-  welcomeButtonText: {
+  arrowButtonText: {
     ...base.textBold,
     fontSize: 16,
     textTransform: "uppercase",
@@ -107,7 +107,7 @@ const theme = StyleSheet.create({
   textContainer: {
     paddingHorizontal: 20,
   },
-  welcomeButton: {
+  arrowButton: {
     width: 290,
     height: 50,
     flexDirection: "row",
@@ -116,7 +116,7 @@ const theme = StyleSheet.create({
     backgroundColor: colors.primary,
     borderRadius: 10,
   },
-  welcomeButtonArrowContainer: {
+  arrowButtonContainer: {
     height: 50,
     width: 50,
     backgroundColor: colors.secondary,
@@ -125,9 +125,8 @@ const theme = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  welcomeButtonArrowImage: {
-    height: "30%",
-    width: "30%",
+  arrowButtonImage: {
+    height: "35%",
   },
   scrollContainer: {
     padding: 20,
@@ -206,6 +205,26 @@ const theme = StyleSheet.create({
     padding: 20,
     borderRadius: 20,
     borderWidth: 0.45,
+  },
+  loginTextInput: {
+    width: 290,
+    height: 50,
+    borderWidth: 1,
+    borderColor: colors.borderGray,
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 8,
+  },
+  loginPasswordContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  loginPasswordVisibilityButton: {
+    marginLeft: -45,
+  },
+  loginPasswordVisibilityImage: {
+    height: 30,
+    width: 30,
   },
 });
 
