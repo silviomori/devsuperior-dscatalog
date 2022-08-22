@@ -7,6 +7,7 @@ import eyeOpen from "../../../assets/icons/eye-open.png";
 import arrow from "../../../assets/icons/arrow_right_white.png";
 import { ILoginData } from "../../@types";
 import { requestBackendLogin } from "../../util/requests";
+import { getAuthData, saveAuthData } from "../../util/storage";
 
 const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -17,7 +18,12 @@ const Login: React.FC = () => {
 
   const handleLogin = () => {
     requestBackendLogin(loginData)
-      .then((data) => console.warn(data))
+      .then((response) => {
+        saveAuthData(response.data);
+        getAuthData().then((authData) =>
+          console.warn("handleLogin: ", authData)
+        );
+      })
       .catch((err) => console.error(err));
   };
 
