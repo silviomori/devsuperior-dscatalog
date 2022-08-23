@@ -1,18 +1,18 @@
+import { AxiosRequestConfig } from "axios";
+import { useCallback, useEffect, useState } from "react";
 import {
   ActivityIndicator,
-  ImageSourcePropType,
   ScrollView,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
-import { ProductCard, ProductFilter } from "../../components";
-import { theme } from "../../styles";
-import { useCallback, useEffect, useState } from "react";
-import { AxiosError, AxiosRequestConfig } from "axios";
-import { requestBackend } from "../../util/requests";
-import { IProduct } from "../../@types";
+import { IProduct } from "../../../@types";
+import { ProductCard, ProductFilter } from "../../../components";
+import { admin, theme } from "../../../styles";
+import { requestBackend } from "../../../util/requests";
 
-const Catalog: React.FC = () => {
+const ProductCrudList: React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [filterValue, setFilterValue] = useState("");
   const [loading, setLoading] = useState(false);
@@ -40,6 +40,11 @@ const Catalog: React.FC = () => {
 
   return (
     <ScrollView contentContainerStyle={theme.scrollContainer}>
+      <TouchableOpacity style={admin.productCrudListNewProductButton}>
+        <Text style={admin.productCrudListNewProductButtonText}>
+          New product
+        </Text>
+      </TouchableOpacity>
       <ProductFilter
         placeholder="Product name"
         value={filterValue}
@@ -50,12 +55,11 @@ const Catalog: React.FC = () => {
       ) : (
         products.map((product) => (
           <View key={product.id}>
-            <ProductCard product={product} />
+            <ProductCard product={product} onDelete={getProducts} />
           </View>
         ))
       )}
     </ScrollView>
   );
 };
-
-export default Catalog;
+export default ProductCrudList;

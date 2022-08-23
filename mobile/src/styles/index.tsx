@@ -67,6 +67,11 @@ const text = StyleSheet.create({
     fontSize: 30,
     color: colors.primary,
   },
+  productCardButton: {
+    ...base.textBold,
+    fontSize: 14,
+    textTransform: "uppercase",
+  },
   productDetailsGoBack: {
     ...base.textBold,
     fontSize: 18,
@@ -85,6 +90,12 @@ const text = StyleSheet.create({
     color: colors.mediumGray,
     textAlign: "left",
     marginBottom: 20,
+  },
+  productCardButtonDelete: {
+    color: colors.red,
+  },
+  productCardButtonEdit: {
+    color: colors.mediumGray,
   },
 });
 
@@ -135,6 +146,10 @@ const theme = StyleSheet.create({
     ...base.card,
     marginBottom: 20,
   },
+  productCardInfoContainer: {
+    width: "100%",
+    alignItems: "center",
+  },
   productCardTopContainer: {
     borderBottomColor: colors.borderGray,
   },
@@ -144,7 +159,7 @@ const theme = StyleSheet.create({
   },
   productCardBottomContainer: {
     width: "100%",
-    paddingVertical: 18,
+    paddingVertical: 13,
     paddingHorizontal: 30,
     textAlign: "left",
     borderTopColor: colors.lightGray,
@@ -153,6 +168,25 @@ const theme = StyleSheet.create({
   productCardPriceContainer: {
     flexDirection: "row",
     marginTop: 10,
+  },
+  productCardButtonsContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginBottom: 16,
+  },
+  productCardButton: {
+    width: "40%",
+    height: 40,
+    borderWidth: 1,
+    borderRadius: 10,
+    justifyContent: "center",
+  },
+  productCardButtonDelete: {
+    borderColor: colors.red,
+  },
+  productCardButtonEdit: {
+    borderColor: colors.borderGray,
   },
   productFilterContainer: {
     ...base.card,
@@ -285,4 +319,19 @@ const tabbar = StyleSheet.create({
   },
 });
 
-export { colors, theme, text, nav, tabbar };
+const admin = StyleSheet.create({
+  productCrudListNewProductButton: {
+    height: 50,
+    justifyContent: "center",
+    backgroundColor: colors.primary,
+    borderRadius: 10,
+  },
+  productCrudListNewProductButtonText: {
+    ...base.textBold,
+    fontSize: 16,
+    color: colors.white,
+    textTransform: "uppercase",
+  },
+});
+
+export { colors, theme, text, nav, tabbar, admin };

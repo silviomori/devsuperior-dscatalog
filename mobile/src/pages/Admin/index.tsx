@@ -4,7 +4,7 @@ import { Text, View } from "react-native";
 import { TabBar } from "../../components";
 import { isAuthenticated } from "../../util/auth";
 import Categories from "./Categories";
-import Products from "./Products";
+import ProductCrudList from "./Product/ProductCrudList";
 import Users from "./Users";
 
 const Admin: React.FC = () => {
@@ -22,7 +22,7 @@ const Admin: React.FC = () => {
   return (
     <View>
       <TabBar activeScreen={activeScreen} setActiveScreen={setActiveScreen} />
-      {activeScreen === "products" && <Products />}
+      {activeScreen === "products" && <ProductCrudList />}
       {activeScreen === "categories" && <Categories />}
       {activeScreen === "users" && <Users />}
     </View>
