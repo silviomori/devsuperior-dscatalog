@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import qs from "qs";
 import { ILoginData } from "../@types";
+import { getAuthData } from "./storage";
 const Buffer = require("buffer").Buffer;
 
 export const BASE_URL =
@@ -10,8 +11,14 @@ const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? "dscatalog123";
 const basicHeader = () =>
   "Basic " + Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64");
 
-export const requestBackend = (config: AxiosRequestConfig) => {
-  return axios({ ...config, baseURL: BASE_URL });
+export const requestBackend = async (config: AxiosRequestConfig) => {
+  const headers = config.withCredentials
+    ? {
+        ...config.headers,
+        Authorization: "Bearer " + (await getAuthData())?.access_token,
+      }
+    : config.headers;
+  return axios({ ...config, baseURL: BASE_URL, headers });
 };
 
 export const requestBackendLogin = (loginData: ILoginData) => {

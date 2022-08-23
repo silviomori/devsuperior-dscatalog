@@ -3,6 +3,7 @@ import { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   Image,
   Modal,
   ScrollView,
@@ -19,6 +20,7 @@ import arrow_back from "../../../../assets/icons/arrow_left_blue.png";
 
 interface IProps {
   setActiveScreen: Function;
+  product?: IProduct;
 }
 
 const ProductCrudForm: React.FC<IProps> = ({ setActiveScreen }) => {
@@ -29,10 +31,41 @@ const ProductCrudForm: React.FC<IProps> = ({ setActiveScreen }) => {
   const [showCategories, setShowCategories] = useState<boolean>(false);
 
   useEffect(() => {
-    requestBackend({ url: "/categories" }).then((response) =>
+    requestBackend({ url: "/categories?sort=name" }).then((response) =>
       setCategories(response.data.content)
     );
   }, []);
+
+  const handleCancel = () => {
+    Alert.alert("Discard changes?", "Any unsaved changes will be lost.", [
+      { text: "Go back", style: "cancel" },
+      {
+        text: "Discard changes",
+        style: "destructive",
+        onPress: () => {
+          setActiveScreen("products");
+        },
+      },
+    ]);
+  };
+
+  const handleSave = () => {
+    setLoading(true);
+    const config: AxiosRequestConfig = {
+      method: isEditing ? "PUT" : "POST",
+      url: isEditing ? `/products/${product.id}` : "/products",
+      data: product,
+      withCredentials: true,
+    };
+    requestBackend(config)
+      .then((response) => {
+        setActiveScreen("products");
+      })
+      .catch((error) => {
+        console.log("error: ", error);
+      });
+    setLoading(false);
+  };
 
   return (
     <View style={admin.productFormContainer}>
@@ -52,7 +85,7 @@ const ProductCrudForm: React.FC<IProps> = ({ setActiveScreen }) => {
                   <TouchableOpacity
                     key={cat.id}
                     onPress={() => {
-                      product.categories = [cat.name];
+                      product.categories = [cat];
                       setShowCategories(false);
                     }}
                     style={admin.productFormModalItem}
@@ -66,7 +99,7 @@ const ProductCrudForm: React.FC<IProps> = ({ setActiveScreen }) => {
 
           <TouchableOpacity
             style={theme.goBackContainer}
-            onPress={() => setActiveScreen("products")}
+            onPress={() => handleCancel()}
           >
             <Image source={arrow_back} />
             <Text style={text.goBack}>Back</Text>
@@ -74,16 +107,29 @@ const ProductCrudForm: React.FC<IProps> = ({ setActiveScreen }) => {
           <TextInput
             placeholder="Product name"
             style={admin.productFormTextInput}
+            value={product.name}
+            onChangeText={(e) => setProduct({ ...product, name: e })}
           />
           <TouchableOpacity
             onPress={() => setShowCategories(true)}
             style={admin.productFormTextInput}
           >
-            <Text style={product.categories == null && { color: "#9e9e9e" }}>
-              {product?.categories ?? "Choose category..."}
+            <Text
+              style={product?.categories?.[0] == null && { color: "#9e9e9e" }}
+            >
+              {product?.categories?.[0] == null
+                ? "Select category..."
+                : product.categories[0].name}
             </Text>
           </TouchableOpacity>
-          <TextInput placeholder="Price" style={admin.productFormTextInput} />
+          <TextInput
+            placeholder="Price"
+            style={admin.productFormTextInput}
+            value={String(product.price ?? "")}
+            onChangeText={(e) =>
+              setProduct({ ...product, price: parseFloat(e) })
+            }
+          />
           <TouchableOpacity style={admin.productFormUploadButton}>
             <Text style={admin.productFormUploadButtonText}>Upload image</Text>
           </TouchableOpacity>
@@ -94,15 +140,21 @@ const ProductCrudForm: React.FC<IProps> = ({ setActiveScreen }) => {
             multiline
             placeholder="Description"
             style={admin.productFormTextInputDescription}
+            value={product.description}
+            onChangeText={(e) => setProduct({ ...product, description: e })}
           />
           <View style={admin.productFormButtonsContainer}>
             <TouchableOpacity
               style={[admin.productFormButton, admin.productFormButtonCancel]}
+              onPress={() => handleCancel()}
             >
               <Text style={admin.productFormButtonTextCancel}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[admin.productFormButton, admin.productFormButtonSave]}
+              onPress={() => {
+                handleSave();
+              }}
             >
               <Text style={admin.productFormButtonTextSave}>Save</Text>
             </TouchableOpacity>

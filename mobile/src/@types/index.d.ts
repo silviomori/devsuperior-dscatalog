@@ -7,7 +7,7 @@ export interface IProduct {
   price?: number;
   description?: string;
   date?: string;
-  categories?: string[];
+  categories?: ICategory[];
 }
 
 export interface ICategory {
