@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from "react-native";
 
 const deviceWidth = Dimensions.get("window").width;
+const deviceHeight = Dimensions.get("window").height;
 
 const colors = {
   white: "#FFFFFF",
@@ -72,7 +73,7 @@ const text = StyleSheet.create({
     fontSize: 14,
     textTransform: "uppercase",
   },
-  productDetailsGoBack: {
+  goBack: {
     ...base.textBold,
     fontSize: 18,
     textTransform: "uppercase",
@@ -213,7 +214,7 @@ const theme = StyleSheet.create({
     padding: 20,
     flexGrow: 1,
   },
-  productDetailsGoBackContainer: {
+  goBackContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
@@ -331,6 +332,104 @@ const admin = StyleSheet.create({
     fontSize: 16,
     color: colors.white,
     textTransform: "uppercase",
+  },
+  productFormContainer: { padding: 20 },
+  productFormCard: {
+    ...base.card,
+    alignItems: "flex-start",
+    padding: 16,
+  },
+  productFormTextInput: {
+    width: "100%",
+    height: 50,
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: colors.borderGray,
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 8,
+  },
+  productFormUploadButton: {
+    width: "100%",
+    height: 38,
+    justifyContent: "center",
+    backgroundColor: colors.mediumGray,
+    borderRadius: 10,
+    marginTop: 8,
+  },
+  productFormUploadButtonText: {
+    ...base.textBold,
+    fontSize: 14,
+    color: colors.white,
+    textTransform: "uppercase",
+  },
+  productFormUploadRestrictionText: {
+    fontSize: 12,
+    color: colors.primary,
+    marginBottom: 8,
+  },
+  productFormTextInputDescription: {
+    width: "100%",
+    height: 200,
+    textAlignVertical: "top",
+    borderWidth: 1,
+    borderColor: colors.borderGray,
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 8,
+  },
+  productFormButtonsContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginVertical: 8,
+  },
+  productFormButton: {
+    width: "40%",
+    height: 40,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  productFormButtonCancel: {
+    borderWidth: 1,
+    borderColor: colors.red,
+  },
+  productFormButtonSave: {
+    backgroundColor: colors.primary,
+  },
+  productFormButtonTextCancel: {
+    ...base.textBold,
+    fontSize: 16,
+    color: colors.red,
+    textTransform: "uppercase",
+  },
+  productFormButtonTextSave: {
+    ...base.textBold,
+    fontSize: 16,
+    color: colors.white,
+    textTransform: "uppercase",
+  },
+  productFormModalContainer: {
+    width: deviceWidth,
+    height: deviceHeight,
+    alignItems: "center",
+    backgroundColor: "#00000055",
+  },
+  productFormModalContent: {
+    ...base.card,
+    width: 300,
+    marginTop: "50%",
+    paddingVertical: 20,
+  },
+  productFormModalItem: {
+    width: "80%",
+    height: 50,
+    justifyContent: "center",
+    padding: 10,
+    marginVertical: 5,
+    backgroundColor: colors.lightGray,
+    borderRadius: 5,
   },
 });
 

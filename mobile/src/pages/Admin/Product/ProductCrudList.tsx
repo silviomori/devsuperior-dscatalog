@@ -12,7 +12,11 @@ import { ProductCard, ProductFilter } from "../../../components";
 import { admin, theme } from "../../../styles";
 import { requestBackend } from "../../../util/requests";
 
-const ProductCrudList: React.FC = () => {
+interface IProps {
+  setActiveScreen: Function;
+}
+
+const ProductCrudList: React.FC<IProps> = ({ setActiveScreen }) => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [filterValue, setFilterValue] = useState("");
   const [loading, setLoading] = useState(false);
@@ -40,7 +44,12 @@ const ProductCrudList: React.FC = () => {
 
   return (
     <ScrollView contentContainerStyle={theme.scrollContainer}>
-      <TouchableOpacity style={admin.productCrudListNewProductButton}>
+      <TouchableOpacity
+        style={admin.productCrudListNewProductButton}
+        onPress={() => {
+          setActiveScreen("newProduct");
+        }}
+      >
         <Text style={admin.productCrudListNewProductButtonText}>
           New product
         </Text>

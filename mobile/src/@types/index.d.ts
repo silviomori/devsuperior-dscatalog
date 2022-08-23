@@ -1,20 +1,25 @@
 declare module "*.png";
 
 export interface IProduct {
-  id: number;
-  imgUrl: string;
-  name: string;
-  price: number;
-  description: string;
-  date: string;
-  categories: string[];
+  id?: number;
+  imgUrl?: string;
+  name?: string;
+  price?: number;
+  description?: string;
+  date?: string;
+  categories?: string[];
 }
 
-interface ILoginData {
+export interface ICategory {
+  id: number;
+  name: string;
+}
+
+export interface ILoginData {
   username: string;
   password: string;
 }
 
-interface IRole {
+export interface IRole {
   role: "ROLE_OPERATOR" | "ROLE_ADMIN";
 }

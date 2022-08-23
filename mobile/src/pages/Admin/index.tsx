@@ -1,9 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { TabBar } from "../../components";
+import { admin } from "../../styles";
 import { isAuthenticated } from "../../util/auth";
 import Categories from "./Categories";
+import ProductCrudForm from "./Product/ProductCrudForm";
 import ProductCrudList from "./Product/ProductCrudList";
 import Users from "./Users";
 
@@ -22,9 +24,16 @@ const Admin: React.FC = () => {
   return (
     <View>
       <TabBar activeScreen={activeScreen} setActiveScreen={setActiveScreen} />
-      {activeScreen === "products" && <ProductCrudList />}
-      {activeScreen === "categories" && <Categories />}
-      {activeScreen === "users" && <Users />}
+      <ScrollView style={{ height: "85%" }}>
+        {activeScreen === "products" && (
+          <ProductCrudList setActiveScreen={setActiveScreen} />
+        )}
+        {activeScreen === "newProduct" && (
+          <ProductCrudForm setActiveScreen={setActiveScreen} />
+        )}
+        {activeScreen === "categories" && <Categories />}
+        {activeScreen === "users" && <Users />}
+      </ScrollView>
     </View>
   );
 };

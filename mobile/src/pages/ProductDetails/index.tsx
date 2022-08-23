@@ -39,11 +39,11 @@ const ProductDetails: React.FC = () => {
       ) : (
         <View style={theme.productDetailsCard}>
           <TouchableOpacity
-            style={theme.productDetailsGoBackContainer}
+            style={theme.goBackContainer}
             onPress={navigation.goBack}
           >
             <Image source={arrow_back} />
-            <Text style={text.productDetailsGoBack}>Back</Text>
+            <Text style={text.goBack}>Back</Text>
           </TouchableOpacity>
 
           <View style={theme.productDetailsImgContainer}>
