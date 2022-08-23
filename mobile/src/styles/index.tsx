@@ -255,4 +255,34 @@ const nav = StyleSheet.create({
   },
 });
 
-export { colors, theme, text, nav };
+const tabbar = StyleSheet.create({
+  container: {
+    width: deviceWidth,
+    height: 80,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    backgroundColor: colors.white,
+  },
+  pill: {
+    width: 1,
+    flexGrow: 1,
+    padding: 15,
+    marginHorizontal: 10,
+    backgroundColor: colors.lightGray,
+    borderRadius: 30,
+  },
+  pillActive: {
+    backgroundColor: colors.bluePill,
+  },
+  pillText: {
+    ...base.textBold,
+    fontSize: 16,
+    color: colors.mediumGray,
+  },
+  pillTextActive: {
+    color: colors.primary,
+  },
+});
+
+export { colors, theme, text, nav, tabbar };
