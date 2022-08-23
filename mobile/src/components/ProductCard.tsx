@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   ImageSourcePropType,
   Text,
@@ -9,14 +10,44 @@ import { text, theme } from "../styles";
 import { IProduct } from "../@types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { AxiosRequestConfig } from "axios";
+import { requestBackend } from "../util/requests";
 
 interface IProps {
   product: IProduct;
-  onDelete?: Function;
+  onDeleteCallback?: Function;
 }
 
-const ProductCard: React.FC<IProps> = ({ product, onDelete }) => {
+const ProductCard: React.FC<IProps> = ({ product, onDeleteCallback }) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
+  const handleDelete = (productId: number | undefined) => {
+    if (product === undefined) {
+      return;
+    }
+
+    Alert.alert(
+      "Delete product?",
+      "Are you sure you want to delete this product?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => {
+            const config: AxiosRequestConfig = {
+              method: "DELETE",
+              url: `/products/${productId}`,
+              withCredentials: true,
+            };
+            requestBackend(config).then(() => {
+              onDeleteCallback?.();
+            });
+          },
+        },
+      ]
+    );
+  };
 
   return (
     <View style={theme.productCard}>
@@ -42,10 +73,13 @@ const ProductCard: React.FC<IProps> = ({ product, onDelete }) => {
           </View>
         </View>
       </TouchableOpacity>
-      {onDelete && (
+      {onDeleteCallback && (
         <View style={theme.productCardButtonsContainer}>
           <TouchableOpacity
             style={[theme.productCardButton, theme.productCardButtonDelete]}
+            onPress={() => {
+              handleDelete(product.id);
+            }}
           >
             <Text
               style={[text.productCardButton, text.productCardButtonDelete]}

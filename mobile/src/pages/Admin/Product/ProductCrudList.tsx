@@ -64,7 +64,7 @@ const ProductCrudList: React.FC<IProps> = ({ setActiveScreen }) => {
       ) : (
         products.map((product) => (
           <View key={product.id}>
-            <ProductCard product={product} onDelete={getProducts} />
+            <ProductCard product={product} onDeleteCallback={getProducts} />
           </View>
         ))
       )}
