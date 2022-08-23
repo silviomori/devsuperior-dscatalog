@@ -14,7 +14,7 @@ import { text, theme } from "../../styles";
 import { BASE_URL } from "../../util/requests";
 import arrow_back from "../../../assets/icons/arrow_left_blue.png";
 
-const ProductDetails = () => {
+const ProductDetails: React.FC = () => {
   const route: any = useRoute();
   const navigation = useNavigation();
   const [product, setProduct] = useState<IProduct>();

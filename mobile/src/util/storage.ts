@@ -19,3 +19,7 @@ export const getAuthData = async () => {
   const authData = await AsyncStorage.getItem(tokenKey);
   return authData ? (JSON.parse(authData) as LoginResponse) : null;
 };
+
+export const removeAuthData = async () => {
+  await AsyncStorage.removeItem(tokenKey);
+};

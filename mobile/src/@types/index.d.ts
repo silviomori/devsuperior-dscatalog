@@ -14,3 +14,7 @@ interface ILoginData {
   username: string;
   password: string;
 }
+
+interface IRole {
+  role: "ROLE_OPERATOR" | "ROLE_ADMIN";
+}

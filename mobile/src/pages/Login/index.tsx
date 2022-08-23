@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { text, theme } from "../../styles";
 
@@ -8,8 +8,14 @@ import arrow from "../../../assets/icons/arrow_right_white.png";
 import { ILoginData } from "../../@types";
 import { requestBackendLogin } from "../../util/requests";
 import { getAuthData, saveAuthData } from "../../util/storage";
+import { isAuthenticated } from "../../util/auth";
+import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../../AuthContext";
+import { getTokenData } from "../../util/token";
 
 const Login: React.FC = () => {
+  const navigation = useNavigation();
+  const { authContextData, setAuthContextData } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [loginData, setLoginData] = useState<ILoginData>({
     username: "",
@@ -18,14 +24,20 @@ const Login: React.FC = () => {
 
   const handleLogin = () => {
     requestBackendLogin(loginData)
-      .then((response) => {
-        saveAuthData(response.data);
-        getAuthData().then((authData) =>
-          console.warn("handleLogin: ", authData)
-        );
+      .then(async (response) => {
+        await saveAuthData(response.data);
+        setAuthContextData({ authenticated: true });
       })
       .catch((err) => console.error(err));
   };
+
+  useEffect(() => {
+    isAuthenticated().then(async (response) => {
+      if (response) {
+        navigation.navigate("Admin" as any);
+      }
+    });
+  }, [authContextData]);
 
   return (
     <View style={theme.container}>

@@ -1,12 +1,19 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { Text, View } from "react-native";
+import { useState } from "react";
+import { AuthContext, AuthContextData } from "./src/AuthContext";
 import Routes from "./src/routes";
 
 const App: React.FC = () => {
+  const [authContextData, setAuthContextData] = useState<AuthContextData>({
+    authenticated: false,
+  });
+
   return (
-    <NavigationContainer>
-      <Routes />
-    </NavigationContainer>
+    <AuthContext.Provider value={{ authContextData, setAuthContextData }}>
+      <NavigationContainer>
+        <Routes />
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 };
 
